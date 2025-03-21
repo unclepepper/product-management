@@ -42,9 +42,16 @@ cu:
 m-up:
 	${DOCKER_COMPOSE} exec ${CONTAINER_PHP} php artisan migrate
 
+m-rollback:
+	${DOCKER_COMPOSE} exec ${CONTAINER_PHP} php artisan migrate:rollback
+
+m-status:
+	${DOCKER_COMPOSE} exec ${CONTAINER_PHP} php artisan migrate:status
+
 cc:
 	${DOCKER_COMPOSE} exec ${CONTAINER_PHP} php artisan cache:clear
 
 right:
 	${DOCKER_COMPOSE} exec ${CONTAINER_PHP} chown -R www-data:www-data . && \
 	chmod -R guo+w storage
+

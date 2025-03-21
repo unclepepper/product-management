@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean
 
 
-
+RUN chown -R ${UID}:${UID} /var/www
 
 
 COPY unit-config.json /docker-entrypoint.d/config.json
@@ -31,9 +31,9 @@ RUN php -r "unlink('composer-setup.php');"
 
 WORKDIR /var/www/app
 
-
-COPY . .
+COPY . /var/www/app
 
 
 CMD ["unitd",  "--no-daemon", "--control", "unix:/var/run/unit/control.sock"]
 
+RUN #chmod 666 /var/run/control.unit.sock.tmp
